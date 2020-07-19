@@ -1,0 +1,3 @@
+export const SEND_FORM_START = 'SEND_FORM_START';
+export const SEND_FORM_SUCCESS = 'SEND_FORM_SUCCESS';
+export const SEND_FORM_FAIL = 'SEND_FORM_FAIL';
