@@ -12,9 +12,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 <Modal
                     show={error}
                     modalClosed={clearError}>
-                    {/*Po kliknięciu w tło Modal - Backdrop zamknij go resetując obiekt error.*/}
                     {error ? error.message : null}
-                    {/*Jeżeli występuje błąd to wyświetl go zamiast Modal, jeśli go nie ma nic nie rób (null)*/}
                 </Modal>
                 <WrappedComponent {...props}/>
             </Aux>
