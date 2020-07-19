@@ -36,10 +36,3 @@ export const sendForm = (data) => {
             })
     };
 };
-
-export const setAuthRedirectPath = (path) => {
-    return {
-        type: 'SET_REDIRECT_PATH',
-        path: path
-    };
-};

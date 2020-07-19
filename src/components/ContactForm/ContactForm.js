@@ -15,7 +15,7 @@ const ContactForm = props => {
             elementType: 'input',
             elementConfig: {
                 type: 'text',
-                placeholder: 'Imię'
+                placeholder: 'First Name'
             },
             value: '',
             validation: {
@@ -28,7 +28,7 @@ const ContactForm = props => {
             elementType: 'input',
             elementConfig: {
                 type: 'text',
-                placeholder: 'Nazwisko'
+                placeholder: 'Last Name'
             },
             value: '',
             validation: {
@@ -102,11 +102,11 @@ const ContactForm = props => {
 
     const inputChangedHandler = (event, inputIdentifier) => {
 
-        const updatedOrderForm = {
+        const updatedForm = {
             ...mainForm
         };
         const updatedFormElement = {
-            ...updatedOrderForm[inputIdentifier]
+            ...updatedForm[inputIdentifier]
         };
 
         updatedFormElement.value = event.target.value;
@@ -116,14 +116,14 @@ const ContactForm = props => {
 
         updatedFormElement.touched = true;
 
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        updatedForm[inputIdentifier] = updatedFormElement;
 
         let formIsValid = true;
-        for (let inputIdentifier in updatedOrderForm) {
-            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+        for (let inputIdentifier in updatedForm) {
+            formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
         }
 
-        setMainForm(updatedOrderForm);
+        setMainForm(updatedForm);
         setFormIsValid(formIsValid);
     };
 
@@ -156,7 +156,7 @@ const ContactForm = props => {
     }
     return (
         <div className={classes.ContactData}>
-            <h4>Wprowadź swoje dane kontaktowe:</h4>
+            <h4>Enter your data and choose date:</h4>
             {form}
         </div>
     );
