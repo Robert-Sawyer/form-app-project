@@ -10,8 +10,8 @@ const App = () => {
     <div>
       <Layout>
           <Switch>
-              <Route path="/" exact component={MainForm}/>
               <Route path="/final" component={FinalPage}/>
+              <Route path="/" exact component={MainForm}/>
           </Switch>
       </Layout>
     </div>

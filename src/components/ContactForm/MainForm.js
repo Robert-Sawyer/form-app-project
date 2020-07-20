@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 import classes from './MainForm.module.css';
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
