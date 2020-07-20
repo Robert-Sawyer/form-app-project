@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import classes from './ContactForm.module.css';
+import {Redirect} from 'react-router-dom';
+import classes from './MainForm.module.css';
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import Spinner from "../UI/Spinner/Spinner";
@@ -8,7 +9,7 @@ import axios from '../../axios-orders';
 import ErrorHandler from '../ErrorHandler/ErrorHandler';
 import * as actions from '../../store/actions/index';
 
-const ContactForm = props => {
+const MainForm = props => {
 
     const [mainForm, setMainForm] = useState({
         name: {
@@ -127,6 +128,10 @@ const ContactForm = props => {
         setFormIsValid(formIsValid);
     };
 
+    const redirectHandler = () => {
+        props.history.replace('/final');
+    }
+
     const formElementsArray = [];
     for (let key in mainForm) {
         formElementsArray.push({
@@ -148,7 +153,7 @@ const ContactForm = props => {
                     touched={formElement.config.touched}
                     changed={(event) => inputChangedHandler(event, formElement.id)}/>
             ))}
-            <Button btnType="Success" disabled={!formIsValid}>SEND</Button>
+            <Button btnType="Success" disabled={!formIsValid} clicked={redirectHandler}>SEND</Button>
         </form>
     );
     if (props.loading) {
@@ -174,4 +179,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ErrorHandler(ContactForm, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorHandler(MainForm, axios));
