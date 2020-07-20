@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     data: [],
-    loading: false
+    loading: false,
+    ifSent: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,7 +21,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                data: state.data.concat(newForm)
+                data: state.data.concat(newForm),
+                ifSent: true
             };
         case actionTypes.SEND_FORM_FAIL:
             return {

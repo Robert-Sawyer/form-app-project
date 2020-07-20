@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom'
 import classes from './MainForm.module.css';
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
@@ -73,7 +74,7 @@ const MainForm = props => {
             formData[formElementIdentifier] = mainForm[formElementIdentifier].value;
         }
         const data = {
-            customerData: formData,
+            formData: formData,
         };
 
         props.onSendForm(data);
@@ -127,10 +128,6 @@ const MainForm = props => {
         setFormIsValid(formIsValid);
     };
 
-    const redirectHandler = () => {
-        props.history.replace('/final');
-    }
-
     const formElementsArray = [];
     for (let key in mainForm) {
         formElementsArray.push({
@@ -139,21 +136,31 @@ const MainForm = props => {
             }
         );
     }
+
+    let redirect = null;
+
+    if (props.ifSent) {
+        redirect = <Redirect to="/final"/>
+    }
+
     let form = (
-        <form onSubmit={sendFormHandler}>
-            {formElementsArray.map(formElement => (
-                <Input
-                    key={formElement.id}
-                    elementType={formElement.config.elementType}
-                    elementConfig={formElement.config.elementConfig}
-                    value={formElement.config.value}
-                    invalid={!formElement.config.valid}
-                    shouldValidate={formElement.config.validation}
-                    touched={formElement.config.touched}
-                    changed={(event) => inputChangedHandler(event, formElement.id)}/>
-            ))}
-            <Button btnType="Success" disabled={!formIsValid} clicked={redirectHandler}>SEND</Button>
-        </form>
+        <div>
+            <form onSubmit={sendFormHandler}>
+                {formElementsArray.map(formElement => (
+                    <Input
+                        key={formElement.id}
+                        elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.value}
+                        invalid={!formElement.config.valid}
+                        shouldValidate={formElement.config.validation}
+                        touched={formElement.config.touched}
+                        changed={(event) => inputChangedHandler(event, formElement.id)}/>
+                ))}
+                <Button btnType="Success" disabled={!formIsValid}>SEND</Button>
+            </form>
+            {redirect}
+        </div>
     );
     if (props.loading) {
         form = <Spinner/>
@@ -168,7 +175,8 @@ const MainForm = props => {
 
 const mapStateToProps = state => {
     return {
-        loading: state.sendForm.loading
+        loading: state.sendForm.loading,
+        ifSent: state.sendForm.ifSent
     }
 };
 
