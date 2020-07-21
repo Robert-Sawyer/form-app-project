@@ -29,7 +29,7 @@ describe('sendForm reducer', () => {
             type: actionTypes.SEND_FORM_SUCCESS,
             formId: 4,
             formData: {
-                customerData: {
+                formData: {
                     name: 'Robert',
                     surname: 'Olbrychowski',
                     email: 'sawyer@lost.com',
@@ -38,7 +38,7 @@ describe('sendForm reducer', () => {
             }
         })).toEqual({
             data: [{
-                "customerData": {
+                "formData": {
                 "date": "2020-07-23",
                 "email": "sawyer@lost.com",
                 "name": "Robert",
